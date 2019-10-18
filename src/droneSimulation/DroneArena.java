@@ -13,7 +13,7 @@ public class DroneArena {
 	
 	private int xSize;
 	private int ySize;
-	private Drone drone;
+	private Drone [] DroneArray;
 	Random randomGenerator;
 	
 	/**
@@ -24,6 +24,7 @@ public class DroneArena {
 	public DroneArena(int X, int Y) {
 		xSize = X;
 		ySize = Y;
+		DroneArray = new Drone [20]; 
 		
 		randomGenerator = new Random();			//create random
 		
@@ -35,6 +36,7 @@ public class DroneArena {
 	 */
 	public static void main(String[] args) {
 		DroneArena a = new DroneArena(20, 10);	// create drone arena
+		a.addDrone();
 		a.addDrone();
 		System.out.println(a.toString());	// print where is
 
@@ -48,7 +50,13 @@ public class DroneArena {
 	public void addDrone() {
 		int xVal = randomGenerator.nextInt(xSize);		//random x less than width
 		int yVal = randomGenerator.nextInt(ySize);		//random y less than height
-		drone = new Drone(xVal, yVal);
+		Drone newDrone = new Drone(xVal, yVal);
+		
+		int index = 0;
+		while(DroneArray[index] != null) {
+			index++;
+		}
+		DroneArray[index] = newDrone;
 		
 	}
 	
@@ -56,7 +64,15 @@ public class DroneArena {
 	 * return size of arena and location of drones
 	 */
 	public String toString() {
-		return "The arena is " + xSize + " x " + ySize + " and " + drone.toString();
+		String locations = "";
+		for(int index = 0; index < DroneArray.length; index++) {		//find all drones
+			if(DroneArray[index] != null) {
+				locations += DroneArray[index].toString();
+				locations += "\n";
+			}
+		}
+				
+		return locations;
 	}
 
 }
