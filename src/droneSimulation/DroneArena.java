@@ -48,8 +48,21 @@ public class DroneArena {
 	 * @param givenDrone
 	 */
 	public void addDrone() {
-		int xVal = randomGenerator.nextInt(xSize);		//random x less than width
-		int yVal = randomGenerator.nextInt(ySize);		//random y less than height
+		boolean clash = true;		//initialise clash to true
+		int xVal = randomGenerator.nextInt(xSize);
+		int yVal = randomGenerator.nextInt(ySize);
+		
+		while(clash) {
+			if(getDroneAt(xVal, yVal) == null) {
+				clash = false;
+			}
+			xVal = randomGenerator.nextInt(xSize);		//random x less than width
+			yVal = randomGenerator.nextInt(ySize);		//random y less than height
+			
+			
+		}
+		
+		
 		Drone newDrone = new Drone(xVal, yVal);
 		
 		int index = 0;
@@ -74,5 +87,23 @@ public class DroneArena {
 				
 		return locations;
 	}
+	
+	/**
+	 * search arraylist of drones to see if there is a drone at x,y
+	 * @param x
+	 * @param y
+	 * @return null if no Drone there, otherwise return drone
+	 */
+	public Drone getDroneAt(int x, int y) {
+		for(int index = 0; index< DroneArray.length; index++) {		//loop through drone array
+			if(DroneArray[index] != null) {
+				if(DroneArray[index].isHere(x,y)) {
+					return DroneArray[index];		//if drone there, return that drone
+				}
+			}
+		}
+		return null;		//if not found, return null
+  }
+
 
 }

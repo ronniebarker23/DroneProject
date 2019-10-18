@@ -43,5 +43,16 @@ public class Drone {
 	public String toString() {
 		return "Drone " + ID + " is at " + xPosition + ", " + yPosition;
 	}
+	
+	/**
+	 * confirm/ deny is drone is at that location
+	 */
+	public boolean isHere(int x, int y) {
+		if(xPosition == x && yPosition == y) {
+			return true;
+		}
+		
+		return false;
+	}
 
 }
