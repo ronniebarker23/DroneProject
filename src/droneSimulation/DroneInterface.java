@@ -4,6 +4,7 @@
 package droneSimulation;
 import java.util.Scanner;
 
+
 /**
  * @author ronniebarker
  * Allows user interaction with arena
@@ -22,6 +23,9 @@ public class DroneInterface {
 	 public DroneInterface() {
 		 s = new Scanner(System.in);			// set up scanner for user input
 		 myArena = new DroneArena(20, 6);	// create arena of size 20*6
+		 //myArena.addDrone();
+		 //myArena.addDrone();
+		 //moveDrones();
 
 		 char ch = ' ';
 		 do {
@@ -70,10 +74,34 @@ public class DroneInterface {
 		 String output = c.toString();		//print canvas
 		 System.out.println(output);
 	 }
+	 
+	 /**
+	  * move all drones 10 times
+	  */
+	 private void moveDrones() {
+		 int count = 10;
+		 while(count > 0) {		//loop 10 times
+			 myArena.moveAllDrones();			//move drones
+			 doDisplay();			//redraw arena
+			 System.out.print(myArena.toString());			//print drones and their location
+			 count -= 1;
+		 }
+		 try
+		 {
+		     Thread.sleep(200);
+		 }
+		 catch(InterruptedException stop)
+		 {
+		     Thread.currentThread().interrupt();
+		 }
+		 
+	 }
+	 
 
 
 	 public static void main(String[] args) {
 		 DroneInterface r = new DroneInterface();	// just call the interface
+		 
 	 }
 
 	}
