@@ -25,7 +25,7 @@ public class DroneInterface {
 
 		 char ch = ' ';
 		 do {
-			 System.out.print("Enter (A)dd drone, get (I)nformation, (D)o display or e(X)it > ");
+			 System.out.print("Enter (A)dd drone, get (I)nformation, (D)o display, (M)ove or e(X)it > ");
 			 ch = s.next().charAt(0);
 			 s.nextLine();
 			 switch (ch) {
@@ -40,6 +40,10 @@ public class DroneInterface {
 			 case 'D':
 			 case 'd':
 				 doDisplay();
+				 break;
+			 case 'M':
+			 case 'm':
+				 myArena.moveAllDrones();
 				 break;
 			 case 'x' : 	ch = 'X';				// when X detected program ends
 			 break;

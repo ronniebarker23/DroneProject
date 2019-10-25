@@ -10,12 +10,13 @@ import java.util.Random;
  */
 
 public enum Direction{
-	NORTH,SOUTH,EAST,WEST;
+	NORTH,EAST,SOUTH,WEST;
+
 
 	/**
 	 * returns a random direction
 	 */
-	public static Direction randomDirection(){
+	public static  Direction randomDirection(){
 		Random random = new Random();
         return values()[random.nextInt(values().length)];
 	}
@@ -28,6 +29,10 @@ public enum Direction{
 	public static Direction next(Direction dir) {
 		return values()[(dir.ordinal() + 1) % values().length];
 	}
+	/*
+	public String toString() {
+		return dir.toString();
+	}*/
 	
 	/**
 	 * Test methods work

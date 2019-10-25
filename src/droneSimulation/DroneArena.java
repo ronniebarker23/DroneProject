@@ -64,7 +64,7 @@ public class DroneArena {
 		}
 		
 		
-		Drone newDrone = new Drone(xVal, yVal);
+		Drone newDrone = new Drone(xVal, yVal, Direction.randomDirection());
 		
 		int index = 0;
 		while(DroneArray[index] != null) {
@@ -120,6 +120,34 @@ public class DroneArena {
 	 */
 	public int getYsize() {
 		return ySize;
+	}
+	
+	/**
+	 * Checks if space valid/ free
+	 * @param xCo location x
+	 * @param yCo location y
+	 * @return true if can move, false if can't
+	 */
+	public boolean canMoveHere(int xCo, int yCo) {
+		//if in arena
+		if(xCo < xSize && xCo >= 0 && yCo < ySize && yCo >= 0) {
+			//if space free
+			if(getDroneAt(xCo, yCo) == null) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * try to move all drones
+	 */
+	public void moveAllDrones() {
+		for(int index = 0; index < DroneArray.length; index ++) {
+			if(DroneArray[index] != null) {
+				DroneArray[index].tryToMove(this);
+			}
+		}
 	}
 	
 	/**
