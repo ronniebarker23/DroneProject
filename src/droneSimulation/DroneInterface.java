@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * @author ronniebarker
- *
+ * Allows user interaction with arena
  */
 public class DroneInterface {
 	
@@ -25,7 +25,7 @@ public class DroneInterface {
 
 		 char ch = ' ';
 		 do {
-			 System.out.print("Enter (A)dd drone, get (I)nformation or e(X)it > ");
+			 System.out.print("Enter (A)dd drone, get (I)nformation, (D)o display or e(X)it > ");
 			 ch = s.next().charAt(0);
 			 s.nextLine();
 			 switch (ch) {
@@ -37,6 +37,10 @@ public class DroneInterface {
 			 case 'i' :
 				 System.out.print(myArena.toString());
 				 break;
+			 case 'D':
+			 case 'd':
+				 doDisplay();
+				 break;
 			 case 'x' : 	ch = 'X';				// when X detected program ends
 			 break;
 			 }
@@ -44,6 +48,25 @@ public class DroneInterface {
 
 		 s.close();									// close scanner
 	 }
+	 
+	 /**
+	  * Display the drone arena on the console
+	  * 
+	  */
+	 void doDisplay() {
+		 // determine the arena size 
+		 int xSize = myArena.getXSize();
+		 int ySize = myArena.getYsize();
+		 
+		 // hence create a suitable sized ConsoleCanvas object
+		 ConsoleCanvas c = new ConsoleCanvas(xSize, ySize);
+		 // call showDrones suitably
+		 myArena.showDrones(c);		//add drones to canvas
+		 // then use the ConsoleCanvas.toString method 
+		 String output = c.toString();		//print canvas
+		 System.out.println(output);
+	 }
+
 
 	 public static void main(String[] args) {
 		 DroneInterface r = new DroneInterface();	// just call the interface

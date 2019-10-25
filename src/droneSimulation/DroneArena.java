@@ -29,19 +29,20 @@ public class DroneArena {
 		randomGenerator = new Random();			//create random
 		
 	}
-
+	
 	/**
-	 * 
-	 * @param args
+	 * show all the drones in the interface
+	 * @param c	the canvas in which drones are shown
 	 */
-	public static void main(String[] args) {
-		DroneArena a = new DroneArena(20, 10);	// create drone arena
-		a.addDrone();
-		a.addDrone();
-		System.out.println(a.toString());	// print where is
-
+	public void showDrones(ConsoleCanvas c) {
+		for(int index = 0; index < DroneArray.length; index ++) {
+			if(DroneArray[index] != null) {
+				DroneArray[index].displayDrone(c);
+			}
+		}
 
 	}
+
 	
 	/**
 	 * add drone to arena
@@ -104,6 +105,35 @@ public class DroneArena {
 		}
 		return null;		//if not found, return null
   }
+	
+	/**
+	 * get width of arena
+	 * @return int width of arena
+	 */
+	public int getXSize() {
+		return xSize;
+	}
+	
+	/**
+	 * get height of arena
+	 * @return int height of arena
+	 */
+	public int getYsize() {
+		return ySize;
+	}
+	
+	/**
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		DroneArena a = new DroneArena(20, 10);	// create drone arena
+		a.addDrone();
+		a.addDrone();
+		System.out.println(a.toString());	// print where is
+
+
+	}
 
 
 }

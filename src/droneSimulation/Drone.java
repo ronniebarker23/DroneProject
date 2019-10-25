@@ -5,7 +5,7 @@ package droneSimulation;
 
 /**
  * @author ronniebarker
- *
+ * Controls drones in the arena
  */
 public class Drone {
 	
@@ -54,5 +54,14 @@ public class Drone {
 		
 		return false;
 	}
+	
+	/**
+	 * display the drone in the canvas
+	 * @param c	the canvas used
+	 */
+	public void displayDrone(ConsoleCanvas c) {
+		c.showIt(xPosition, yPosition, 'D');
+	}
+
 
 }
