@@ -1,0 +1,44 @@
+/**
+ * 
+ */
+package droneSimulation;
+import java.util.Random;
+
+/**
+ * @author ronniebarker
+ * Direction drones can move
+ */
+
+public enum Direction{
+	NORTH,SOUTH,EAST,WEST;
+
+	/**
+	 * returns a random direction
+	 */
+	public static Direction randomDirection(){
+		Random random = new Random();
+        return values()[random.nextInt(values().length)];
+	}
+	
+	/**
+	 * give next direction
+	 * @param dir given direction
+	 * @return following direction
+	 */
+	public static Direction nextDirection(Direction dir) {
+		return values()[(dir.ordinal() + 1) % values().length];
+	}
+	
+	/**
+	 * Test methods work
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Direction d = randomDirection();
+		System.out.println(d);
+		Direction n = nextDirection(d);
+		System.out.println(n);
+	}
+
+}
