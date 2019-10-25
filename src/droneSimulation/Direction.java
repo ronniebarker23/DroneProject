@@ -25,7 +25,7 @@ public enum Direction{
 	 * @param dir given direction
 	 * @return following direction
 	 */
-	public static Direction nextDirection(Direction dir) {
+	public static Direction next(Direction dir) {
 		return values()[(dir.ordinal() + 1) % values().length];
 	}
 	
@@ -37,7 +37,7 @@ public enum Direction{
 		// TODO Auto-generated method stub
 		Direction d = randomDirection();
 		System.out.println(d);
-		Direction n = nextDirection(d);
+		Direction n = next(d);
 		System.out.println(n);
 	}
 
