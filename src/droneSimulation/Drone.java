@@ -30,6 +30,19 @@ public class Drone {
 	}
 	
 	/**
+	 * instantiate drone
+	 * @param X co ord
+	 * @param Y co ord
+	 * @param iD id of drone
+	 */
+	public Drone(int X, int Y, Direction dir, int iD) {
+		direction = dir;
+		xPosition = X;
+		yPosition = Y;
+		ID = iD;
+	}
+	
+	/**
 	 * print location of the instantiated drone
 	 */
 	public String toString() {

@@ -183,23 +183,64 @@ public class DroneInterface {
 					BufferedReader bufReader = new BufferedReader(fileReader);
 			 		String input;
 			 		input = bufReader.readLine();
-			 		while (input!= null) {
-			 			System.out.println(input);
+			 		
+			 		int line = 0;
+			 		int droneCount = 0;
+			 		int xSize = 0;
+			 		int ySize = 0;
+			 		int x = 0;
+			 		int y = 0;
+			 		int ID = 0;
+			 		while (input!= null) { 		//loop to include whole file
+			 			if (line == 0) {		//first line has x size 
+			 				xSize = Integer.parseInt(input);
+			 			}
+			 			else if (line == 1) {		//second line has y size
+			 				ySize = Integer.parseInt(input);
+			 				myArena = new DroneArena(xSize, ySize);	  	//create arena of this size
+			 			}
+			 			
+			 			else {						// if past size of arena, add drones
+			 				if(droneCount == 0) {		//if at beginning set ID
+			 					ID = Integer.parseInt(input);
+			 				}
+			 				if(droneCount == 1) {		//next add x co ordinate
+			 					x = Integer.parseInt(input);
+			 				}
+			 				if(droneCount == 2) {		//next add y co ordinate
+			 					y = Integer.parseInt(input);
+			 				}
+			 				if(droneCount == 3) {		//next add direction
+			 					
+			 					Direction d = Direction.valueOf(input);		
+			 					
+			 					myArena.addDrone(x, y, d, ID);
+			 					droneCount = -1;		//reset droneCount
+			 				}
+			 				droneCount ++;
+			 			
+			 			}
+			 			line ++;
+			 			
 			 			input = bufReader.readLine();
 			 		}
 			 		
 			 		bufReader.close();
-
-				} catch (FileNotFoundException e) {
+				}
+				
+				catch (FileNotFoundException e){
 					e.printStackTrace();
-				} catch (IOException e) {
+				} 
+				catch (IOException e) {
 					e.printStackTrace();
 				}
+				
 		 		
 
-		 	}
-		 }
+		 	
+		  }
 
+	 }
 	 }
 	 
 

@@ -75,14 +75,32 @@ public class DroneArena {
 	}
 	
 	/**
+	 * add given drone to arena
+	 * @param x co ord
+	 * @param y co ord 
+	 * @param d direction of movement
+	 * @param id id of drone
+	 */
+	public void addDrone(int x, int y, Direction d, int id) {
+		Drone newDrone = new Drone(x, y, d, id);
+		
+		int index = 0;
+		while(DroneArray[index] != null) {
+			index++;
+		}
+		DroneArray[index] = newDrone;
+		
+	}
+	
+	/**
 	 * return size of arena and location of drones
 	 */
 	public String toString() {
-		String locations = "The arena is " + xSize + " x " + ySize + "\n";
+		String locations = "The arena is " + xSize + " x " + ySize;
 		for(int index = 0; index < DroneArray.length; index++) {		//find all drones
 			if(DroneArray[index] != null) {
-				locations += DroneArray[index].toString();
 				locations += "\n";
+				locations += DroneArray[index].toString();
 			}
 		}
 				
@@ -157,11 +175,12 @@ public class DroneArena {
 	public String saveArena() {
 		String save = "";
 		save += xSize + "\n";
-		save += ySize + "\n";
+		save += ySize;
 		for(int index = 0; index < DroneArray.length; index++) {		//find all drones
 			if(DroneArray[index] != null) {
-				save += DroneArray[index].saveDrone();
 				save += "\n";
+				save += DroneArray[index].saveDrone();
+				
 			}
 		}
 		
