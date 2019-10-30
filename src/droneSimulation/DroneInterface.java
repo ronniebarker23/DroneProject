@@ -29,7 +29,7 @@ public class DroneInterface {
 
 		 char ch = ' ';
 		 do {
-			 System.out.print("Enter (A)dd drone, get (I)nformation, (D)o display, (M)ove or e(X)it > ");
+			 System.out.print("Enter (N)ew arena, (A)dd drone, get (I)nformation, (D)o display, (M)ove or e(X)it > ");
 			 ch = s.next().charAt(0);
 			 s.nextLine();
 			 switch (ch) {
@@ -47,7 +47,18 @@ public class DroneInterface {
 				 break;
 			 case 'M':
 			 case 'm':
-				 myArena.moveAllDrones();
+				 moveDrones();
+				 break;
+			 case 'N':
+			 case 'n':
+				 //ask for size
+				 System.out.println("Enter width of the arena ");
+				 int x = s.nextInt();
+				 s.nextLine();
+				 System.out.println("Enter height of the arena ");
+				 int y = s.nextInt();
+				 s.nextLine();
+				 newArena(x,y);
 				 break;
 			 case 'x' : 	ch = 'X';				// when X detected program ends
 			 break;
@@ -95,6 +106,15 @@ public class DroneInterface {
 		     Thread.currentThread().interrupt();
 		 }
 		 
+	 }
+	 
+	/**
+	 * create new arena
+	 * @param x width of arena
+	 * @param y height of arena
+	 */
+	 private void newArena(int x, int y) {
+		 myArena = new DroneArena(x,y);
 	 }
 	 
 
