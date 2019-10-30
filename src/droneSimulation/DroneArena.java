@@ -78,7 +78,7 @@ public class DroneArena {
 	 * return size of arena and location of drones
 	 */
 	public String toString() {
-		String locations = "";
+		String locations = "The arena is " + xSize + " x " + ySize + "\n";
 		for(int index = 0; index < DroneArray.length; index++) {		//find all drones
 			if(DroneArray[index] != null) {
 				locations += DroneArray[index].toString();
@@ -148,6 +148,25 @@ public class DroneArena {
 				DroneArray[index].tryToMove(this);
 			}
 		}
+	}
+	
+	/**
+	 * Provide data to save arena
+	 * @return string with arena info on each line
+	 */
+	public String saveArena() {
+		String save = "";
+		save += xSize + "\n";
+		save += ySize + "\n";
+		for(int index = 0; index < DroneArray.length; index++) {		//find all drones
+			if(DroneArray[index] != null) {
+				save += DroneArray[index].saveDrone();
+				save += "\n";
+			}
+		}
+		
+		return save;
+				
 	}
 	
 	/**

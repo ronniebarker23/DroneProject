@@ -2,7 +2,17 @@
  * 
  */
 package droneSimulation;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
+import javax.swing.JFileChooser;
+
+
 
 
 /**
@@ -14,6 +24,8 @@ public class DroneInterface {
 	 private Scanner s;							// scanner used for input from user
 	 
 	 private DroneArena myArena;				// arena in which drones are shown
+	 JFileChooser chooser = new JFileChooser();
+
 	
 	 /**
 	  * constructor for DroneInterface
@@ -29,7 +41,7 @@ public class DroneInterface {
 
 		 char ch = ' ';
 		 do {
-			 System.out.print("Enter (N)ew arena, (A)dd drone, get (I)nformation, (D)o display, (M)ove or e(X)it > ");
+			 System.out.print("Enter (N)ew arena, (A)dd drone, get (I)nformation, (D)o display, (M)ove, (S)ave arena, (L)oad arena or e(X)it > ");
 			 ch = s.next().charAt(0);
 			 s.nextLine();
 			 switch (ch) {
@@ -59,6 +71,14 @@ public class DroneInterface {
 				 int y = s.nextInt();
 				 s.nextLine();
 				 newArena(x,y);
+				 break;
+			 case 'S':
+			 case 's':
+				 saveArena();
+				 break;
+			 case 'L':
+			 case 'l':
+				 openFile();
 				 break;
 			 case 'x' : 	ch = 'X';				// when X detected program ends
 			 break;
@@ -117,10 +137,76 @@ public class DroneInterface {
 		 myArena = new DroneArena(x,y);
 	 }
 	 
+	 /**
+	  * save arena to file
+	  */
+	 private void saveArena() {
+		 //pick name and location
+		 int approve = chooser.showSaveDialog(null);
+		 if (approve == JFileChooser.APPROVE_OPTION) {			//if possible
+			 File selFile = chooser.getSelectedFile();			//get output file
+			 File currDir = chooser.getCurrentDirectory();		//get directory to save to
+				System.out.println("You chose to save into file: "
+						+ selFile.getName() + " in the dir " 
+						+ currDir.getAbsolutePath());
+			
+			 //save
+			 try {
+				 FileWriter outFileWriter = new FileWriter (selFile);		//create filewriter for selected file
+				 PrintWriter writer = new PrintWriter(outFileWriter);
+				 writer.println(myArena.saveArena());						//save arena info to file
+				 writer.close();
+			 } 
+			 catch (FileNotFoundException e) {								//if can't find file
+			 	e.printStackTrace();
+			 } 
+			 catch (IOException e) {										//if input/output error
+			 	e.printStackTrace();
+			 }
+		 }
+		 
+	 }
+	 
+	 /**
+	  * load arena from file
+	  */
+	 public void openFile() {
+		 int approve = chooser.showOpenDialog(null);
+		 if (approve == JFileChooser.APPROVE_OPTION) {				// if possible
+		 	File selFile = chooser.getSelectedFile();				//selected file
+		 	System.out.println("You chose to open this file: "
+		 				+ selFile.getName());
+		 	if(selFile.isFile()){ //exits and is a file
+		 		//set up file and stream
+				try {
+					FileReader fileReader = new FileReader(selFile);
+					BufferedReader bufReader = new BufferedReader(fileReader);
+			 		String input;
+			 		input = bufReader.readLine();
+			 		while (input!= null) {
+			 			System.out.println(input);
+			 			input = bufReader.readLine();
+			 		}
+			 		
+			 		bufReader.close();
+
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		 		
+
+		 	}
+		 }
+
+	 }
+	 
 
 
 	 public static void main(String[] args) {
 		 DroneInterface r = new DroneInterface();	// just call the interface
+		 
 		 
 	 }
 

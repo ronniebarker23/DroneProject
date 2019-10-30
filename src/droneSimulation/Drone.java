@@ -92,6 +92,21 @@ public class Drone {
 		
 		
 	}
+	
+	/**
+	 * save drone info
+	 * @return drone info on different lines
+	 */
+	public String saveDrone() {
+		String save = "";
+		save += ID + "\n";
+		save += xPosition + "\n";
+		save += yPosition + "\n";
+		save += direction;
+		
+		return save;
+		
+	}
 
 	/**
 	 * @param args
